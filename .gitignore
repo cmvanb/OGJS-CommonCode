@@ -1,0 +1,12 @@
+# Unwanted files/file types
+*.DS_Store*
+*.directory*
+*.map
+
+# VSCode
+.vscode/
+jsconfig.json
+
+# Webstorm
+.idea/
+vcs.xml
