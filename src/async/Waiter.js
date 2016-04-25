@@ -31,7 +31,7 @@ class Waiter
      */
     waitFor(callback, context)
     {
-        console.assert(!this._inProgress, Waiter.ERRORS.ALREADY_IN_PROGRESS);
+        console.assert(!this._inProgress, "Waiter.waitFor: " + Waiter.ERRORS.ALREADY_IN_PROGRESS);
         
         // This function is basically syntactic sugar, so just re-use the perfectly fine andFor().
         return this.andFor.apply(this, arguments);
@@ -47,7 +47,7 @@ class Waiter
      */
     andFor(callback, context)
     {
-        console.assert(!this._inProgress, Waiter.ERRORS.ALREADY_IN_PROGRESS);
+        console.assert(!this._inProgress, "Waiter.andFor: " + Waiter.ERRORS.ALREADY_IN_PROGRESS);
         
         var nextObject = CallbackUtil.createCallbackContextObject.apply(this, arguments);
 
@@ -65,7 +65,7 @@ class Waiter
      */
     then(callback, context)
     {
-        console.assert(!this._inProgress, Waiter.ERRORS.ALREADY_IN_PROGRESS);
+        console.assert(!this._inProgress, "Waiter.then: " + Waiter.ERRORS.ALREADY_IN_PROGRESS);
         
         var finalObject =  CallbackUtil.createCallbackContextObject.apply(this, arguments);
 
@@ -99,6 +99,6 @@ class Waiter
 
 Waiter.ERRORS = {};
 
-Waiter.ERRORS.ALREADY_IN_PROGRESS = "Waiter.waitFor: This function is not possible for waiters that are already in progress. Check the order in which you call the functions.";
+Waiter.ERRORS.ALREADY_IN_PROGRESS = "This function is not possible for waiters that are already in progress. Check the order in which you call the functions.";
 
 export default Waiter;
