@@ -1,8 +1,8 @@
 class CallbackUtil
 {
     /**
-     * Create a js object encapsulating a callback function and it's context, and any additional
-     * arguments.
+     * Create a js object encapsulating a callback function and it's context, 
+     * and any additional arguments.
      *
      * @param callback
      * @param context
@@ -10,9 +10,10 @@ class CallbackUtil
      */
     static createCallbackContextObject(callback, context)
     {
-        var args = Array.prototype.slice.call(arguments);
+        let args = Array.prototype.slice.call(arguments);
 
-        // Splice out callback and context, we want to pass any extra arguments as an array.
+        // Splice out callback and context, we want to pass any extra arguments
+        // as an array.
         args.splice(0, 2);
 
         return {
