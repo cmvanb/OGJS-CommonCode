@@ -57,7 +57,8 @@ class Waiter
             "Waiter.andFor: " + Waiter.ERRORS.ALREADY_IN_PROGRESS);
         
         let nextObject = CallbackUtil.createCallbackContextObject.apply(
-            this, arguments);
+            this,
+            arguments);
 
         this._callbackContextObjects.push(nextObject);
 
@@ -78,7 +79,8 @@ class Waiter
             "Waiter.then: " + Waiter.ERRORS.ALREADY_IN_PROGRESS);
         
         let finalObject = CallbackUtil.createCallbackContextObject.apply(
-            this, arguments);
+            this,
+            arguments);
 
         let callbacksCount = this._callbackContextObjects.length;
 
@@ -91,7 +93,8 @@ class Waiter
             if (callbacksCompleted === callbacksCount)
             {
                 finalObject.callback.apply(
-                    finalObject.context, finalObject.args);
+                    finalObject.context,
+                    finalObject.args);
             }
         }
 
@@ -104,7 +107,8 @@ class Waiter
             Array.prototype.push.apply(args, callbackContextObject.args);
 
             callbackContextObject.callback.apply(
-                callbackContextObject.context, args);
+                callbackContextObject.context,
+                args);
         }, this);
     }
 }
