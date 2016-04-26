@@ -6,8 +6,8 @@ Use a maximum line length of 80 characters. Originally this maximum length was a
 
 Benefits of a maximum line length of 80 characters include:
 
-* Promotes shorter, more readable code.
-* Allows two code files to open adjacently on standard HD (1920x1080) monitors.
+* Promoting shorter, more readable code.
+* Allowing two code files to open adjacently on standard HD (1920x1080) monitors.
 
 ## Line breaks
 
