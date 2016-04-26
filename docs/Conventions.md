@@ -4,7 +4,7 @@
 
 Use a maximum line length of 80 characters. Originally this maximum length was a technical limit, however these days it is simply a nice style that has some desirable benefits.
 
-A maximum line length of 80 characters...
+Benefits of a maximum line length of 80 characters include:
 
 * Promotes shorter, more readable code.
 * Allows two code files to open adjacently on standard HD (1920x1080) monitors.
@@ -18,7 +18,7 @@ A maximum line length of 80 characters...
 In this situation the function call parameters have extended past the 80 character limit.
 
     // ------------------------------------ This is the 80 character limit. --->
-    
+
     {
         exampleObject.exampleMethod("Some example data in a string.", "More example data.");
     }
