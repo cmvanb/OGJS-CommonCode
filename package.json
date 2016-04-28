@@ -1,0 +1,23 @@
+{
+  "name": "ogjs-commoncode",
+  "version": "1.0.0",
+  "description": "OGJS stands for OpenGame.js, a loose collection of my open source game engine, framework and utility code.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs",
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cmvanb/OGJS-CommonCode.git"
+  },
+  "author": "Casper van B",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cmvanb/OGJS-CommonCode/issues"
+  },
+  "homepage": "https://github.com/cmvanb/OGJS-CommonCode#readme"
+}
