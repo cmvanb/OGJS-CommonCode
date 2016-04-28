@@ -3,6 +3,11 @@
   "version": "1.0.0",
   "description": "OGJS stands for OpenGame.js, a loose collection of my open source game engine, framework and utility code.",
   "main": "index.js",
+  "system": {
+    "main": "",
+    "directories": {
+    }
+  },
   "directories": {
     "doc": "docs",
     "test": "tests"
@@ -19,5 +24,8 @@
   "bugs": {
     "url": "https://github.com/cmvanb/OGJS-CommonCode/issues"
   },
-  "homepage": "https://github.com/cmvanb/OGJS-CommonCode#readme"
+  "homepage": "https://github.com/cmvanb/OGJS-CommonCode#readme",
+  "devDependencies": {
+    "steal": "^0.16.2"
+  }
 }
