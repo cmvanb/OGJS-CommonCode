@@ -19,7 +19,7 @@
     "type": "git",
     "url": "git+https://github.com/cmvanb/OGJS-CommonCode.git"
   },
-  "author": "Casper van B",
+  "author": "cmvanb",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/cmvanb/OGJS-CommonCode/issues"
