@@ -11,9 +11,8 @@ import TestCallbackUtil from "tests/utils/TestCallbackUtil";
 
 (function()
 {
-    // Load all unit tests.
+    // Load and run all unit tests.
     QUnit.load();
 
-    // Run all unit tests.
     QUnit.start();
 }());
