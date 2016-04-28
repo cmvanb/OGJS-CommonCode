@@ -19,7 +19,7 @@ class CallbackUtil
         return {
             callback: callback,
             context: context,
-            args: args
+            arguments: args
         };
     };
 }

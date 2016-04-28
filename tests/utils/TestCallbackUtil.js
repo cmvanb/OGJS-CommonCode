@@ -1,13 +1,14 @@
 "use strict";
 
-//System.import("../lib/qunit/qunit");
-//System.import("./utils/TestCallbackUtil");
-
-import * as QUnit from "../../lib/qunit/qunit";
-import * as CallbackUtil from "../../src/utils/CallbackUtil";
+import QUnit from "lib/qunit/qunit";
+import CallbackUtil from "src/utils/CallbackUtil";
 
 (function()
 {
+    console.log(QUnit);
+    
+    QUnit.module('CallbackUtil');
+    
     QUnit.test('CallbackUtil.createCallbackContextObject', function(assert)
     {
         let callback = function(){};
@@ -20,14 +21,22 @@ import * as CallbackUtil from "../../src/utils/CallbackUtil";
         
         let argument3 = 1;
         
-        let callbackContextObject = CallbackUtil.createCallbackContextObject(
+        let foo = CallbackUtil.createCallbackContextObject(
             callback,
             context,
             argument1,
             argument2,
             argument3);
-        
-        assert.propEqual(true, false,
+
+        let bar = {
+            callback: callback,
+            context: context,
+            arguments: [ argument1, argument2, argument3 ]
+        };
+
+        assert.propEqual(foo, bar,
             'Constructor correctly intializes all the values of the component.');
     });
 }());
+
+export default {};

@@ -5,7 +5,7 @@
  * @author Casper
  */
 
-import * as CallbackUtil from "utils/CallbackUtil";
+import CallbackUtil from "utils/CallbackUtil";
 
 class Waiter
 {
