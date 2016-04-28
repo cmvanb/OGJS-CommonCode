@@ -1,3 +1,12 @@
+/**
+ * CallbackUtil is a static utility class containing methods related to 
+ * callbacks.
+ * 
+ * @author Casper
+ */
+
+"use strict";
+
 class CallbackUtil
 {
     /**

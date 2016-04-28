@@ -1,3 +1,9 @@
+/**
+ * Tests for CallbackUtil.
+ * 
+ * @author Casper
+ */
+
 "use strict";
 
 import QUnit from "lib/qunit/qunit";
@@ -5,8 +11,6 @@ import CallbackUtil from "src/utils/CallbackUtil";
 
 (function()
 {
-    console.log(QUnit);
-    
     QUnit.module('CallbackUtil');
     
     QUnit.test('CallbackUtil.createCallbackContextObject', function(assert)
@@ -35,8 +39,6 @@ import CallbackUtil from "src/utils/CallbackUtil";
         };
 
         assert.propEqual(foo, bar,
-            'Constructor correctly intializes all the values of the component.');
+            'Callback context object is created with correct values.');
     });
 }());
-
-export default {};

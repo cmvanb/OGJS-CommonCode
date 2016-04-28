@@ -5,6 +5,8 @@
  * @author Casper
  */
 
+"use strict";
+
 import CallbackUtil from "utils/CallbackUtil";
 
 class Waiter
