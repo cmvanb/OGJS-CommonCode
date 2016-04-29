@@ -7,7 +7,7 @@
 
 "use strict";
 
-import CallbackUtil from "utils/CallbackUtil";
+import CallbackUtil from "src/utils/CallbackUtil";
 
 class Waiter
 {

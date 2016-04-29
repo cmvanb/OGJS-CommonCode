@@ -8,6 +8,11 @@ OGJS stands for OpenGame.js, a loose collection of my open source game engine, f
 
 This is the common code repository. It contains low level, re-usable code aimed at building games.
 
+## Features
+
+* Asynchronous utilities
+** Waiter
+
 ## TODO
 
 * Polyfills

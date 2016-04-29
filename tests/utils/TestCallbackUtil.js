@@ -11,9 +11,9 @@ import CallbackUtil from "src/utils/CallbackUtil";
 
 (function()
 {
-    QUnit.module('CallbackUtil');
+    QUnit.module("CallbackUtil");
     
-    QUnit.test('CallbackUtil.createCallbackContextObject', function(assert)
+    QUnit.test("createCallbackContextObject | returns expected object", function(assert)
     {
         let callback = function(){};
         
@@ -25,20 +25,26 @@ import CallbackUtil from "src/utils/CallbackUtil";
         
         let argument3 = 1;
         
-        let foo = CallbackUtil.createCallbackContextObject(
+        let actualObject = CallbackUtil.createCallbackContextObject(
             callback,
             context,
             argument1,
             argument2,
             argument3);
 
-        let bar = {
+        let expectedObject = {
             callback: callback,
             context: context,
-            arguments: [ argument1, argument2, argument3 ]
+            arguments: [
+                argument1,
+                argument2,
+                argument3
+            ]
         };
 
-        assert.propEqual(foo, bar,
-            'Callback context object is created with correct values.');
+        assert.propEqual(
+            actualObject,
+            expectedObject,
+            "Callback context object was created with correct values.");
     });
 }());
