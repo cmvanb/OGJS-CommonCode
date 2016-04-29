@@ -11,16 +11,16 @@ This is the common code repository. It contains low level, re-usable code aimed 
 ## Features
 
 * Asynchronous utilities
-  * Waiter
+  * [ ] Sequencer
+  * [x] Waiter
 
 ## TODO
 
-* Polyfills
-* OOP (Inheritance)
-* Math classes
-* Javascript utilities (string, array, object, etc.)
-* Abstract patterns (Entity-Component)
-* Events & Messaging
-* Asynchronous utilities
-* Platform & device info
-* Storage
+* [ ] Polyfills
+* [ ] OOP (Inheritance)
+* [ ] Math classes
+* [ ] Javascript utilities (string, array, object, etc.)
+* [ ] Abstract patterns (Entity-Component)
+* [ ] Events & Messaging
+* [ ] Platform & device info
+* [ ] Storage
