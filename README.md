@@ -10,7 +10,7 @@ This is the common code repository. It contains low level, re-usable code aimed 
 
 ## Features
 
-* Asynchronous utilities
+* [ ] Asynchronous utilities
   * [ ] Sequencer
   * [x] Waiter
 
