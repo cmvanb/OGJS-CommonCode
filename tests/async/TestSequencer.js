@@ -96,4 +96,25 @@ import Sequencer from "src/async/Sequencer";
             [ 3, 2, 1 ],
             "Multiple integer arguments were passed correctly.");
     });
+
+    QUnit.test("sequence -> doesn't allow more function calls after finally()", function(assert)
+    {
+        let sequencer = new Sequencer();
+        
+        function mockAsyncProcess(callback, context)
+        {
+            callback.call(context);
+        }
+        
+        sequencer.sequence(mockAsyncProcess, this)
+            .andThen(mockAsyncProcess, this)
+            .finally(mockAsyncProcess, this);
+        
+        assert.throws(
+            function()
+            {
+                sequencer.sequence(mockAsyncProcess, this);
+            },
+            "Throws error when calling sequence() after finally().");
+    });
 }());

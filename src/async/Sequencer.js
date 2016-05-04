@@ -34,9 +34,10 @@ class Sequencer
      */
     sequence(callback, context)
     {
-        console.assert(
-            !this._inProgress,
-            "Sequencer.sequence: " + Sequencer.ERRORS.ALREADY_IN_PROGRESS);
+        if (this._inProgress)
+        {
+            throw "Sequencer.sequence: " + Sequencer.ERRORS.ALREADY_IN_PROGRESS;
+        }
         
         let nextProcess = CallbackUtil.createCallbackContextObject.apply(
             this,
@@ -75,6 +76,8 @@ class Sequencer
     {
         this.sequence.apply(this, arguments);
 
+        this._inProgress = true;
+        
         this._callNext();
     }
 
