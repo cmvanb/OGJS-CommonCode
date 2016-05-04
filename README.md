@@ -16,11 +16,11 @@ This is the common code repository. It contains low level, re-usable code aimed 
 
 ## TODO
 
-* [ ] Polyfills
+* [ ] Game Loop
+* [ ] Abstract patterns (Entity-Component)
 * [ ] OOP (Inheritance)
 * [ ] Math classes
 * [ ] Javascript utilities (string, array, object, etc.)
-* [ ] Abstract patterns (Entity-Component)
 * [ ] Events & Messaging
 * [ ] Platform & device info
 * [ ] Storage
