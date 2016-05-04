@@ -73,10 +73,6 @@ class Sequencer
      */
     finally(callback, context)
     {
-        console.assert(
-            !this._inProgress,
-            "Sequencer.finally: " + Sequencer.ERRORS.ALREADY_IN_PROGRESS);
-
         this.sequence.apply(this, arguments);
 
         this._callNext();
