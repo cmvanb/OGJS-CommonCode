@@ -27,14 +27,16 @@ import Waiter from "src/async/Waiter";
             
             callback.call(context);
         }
+        
+        function finalCallback()
+        {
+            calledFinalCallback = true;
+        }
 
         waiter.waitFor(mockAsyncProcess, this)
             .andFor(mockAsyncProcess, this)
             .andFor(mockAsyncProcess, this)
-            .finally(function()
-            {
-                calledFinalCallback = true;
-            }, this);
+            .finally(finalCallback, this);
 
         assert.strictEqual(
             timesCalled,
@@ -59,7 +61,7 @@ import Waiter from "src/async/Waiter";
             callback.call(context);
         }
         
-        function finalMockAsyncProcess()
+        function finalCallback()
         {
             let args = Array.prototype.splice.call(arguments, 0);
             
@@ -72,7 +74,7 @@ import Waiter from "src/async/Waiter";
 
         waiter.waitFor(mockAsyncProcess, this, "foo")
             .andFor(mockAsyncProcess, this, bar)
-            .finally(finalMockAsyncProcess, this, 3, 2, 1);
+            .finally(finalCallback, this, 3, 2, 1);
 
         assert.strictEqual(
             argumentsPassed[0],
@@ -88,5 +90,30 @@ import Waiter from "src/async/Waiter";
             [ argumentsPassed[2], argumentsPassed[3], argumentsPassed[4] ],
             [ 3, 2, 1 ],
             "Multiple integer arguments were passed correctly.");
+    });
+
+    QUnit.test("waitFor -> doesn't allow more function calls after finally()", function(assert)
+    {
+        let waiter = new Waiter();
+        
+        function mockAsyncProcess(callback, context)
+        {
+            callback.call(context);
+        }
+        
+        function finalCallback()
+        {
+        }
+        
+        waiter.waitFor(mockAsyncProcess, this)
+            .andFor(mockAsyncProcess, this)
+            .finally(finalCallback, this);
+        
+        assert.throws(
+            function()
+            {
+                waiter.waitFor(mockAsyncProcess, this);
+            },
+            "Throws error when calling waitFor() after finally().");
     });
 }());
