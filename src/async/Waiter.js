@@ -1,5 +1,5 @@
 /**
- * A waiter object waits for an arbitrary number of asynchronous processes. 
+ * Waiter waits for a collection of parallel asynchronous processes to complete.
  * Each async process is encapsulated in a callback-context-argument object.
  *
  * @author Casper
@@ -18,7 +18,7 @@ class Waiter
      */
     constructor()
     {
-        this._callbackContextObjects = [];
+        this._processes = [];
 
         this._inProgress = false;
     }
@@ -34,13 +34,18 @@ class Waiter
      */
     waitFor(callback, context)
     {
-        console.assert(
-            !this._inProgress,
-            "Waiter.waitFor: " + Waiter.ERRORS.ALREADY_IN_PROGRESS);
+        if (this._inProgress)
+        {
+            throw "Waiter.waitFor: " + Waiter.ERRORS.ALREADY_IN_PROGRESS;
+        }
         
-        // This function is basically syntactic sugar, so just reuse the
-        // perfectly fine andFor().
-        return this.andFor.apply(this, arguments);
+        let nextProcess = CallbackUtil.createCallbackContextObject.apply(
+            this,
+            arguments);
+
+        this._processes.push(nextProcess);
+
+        return this;
     }
     
     /**
@@ -54,37 +59,30 @@ class Waiter
      */
     andFor(callback, context)
     {
-        console.assert(
-            !this._inProgress,
-            "Waiter.andFor: " + Waiter.ERRORS.ALREADY_IN_PROGRESS);
-        
-        let nextObject = CallbackUtil.createCallbackContextObject.apply(
-            this,
-            arguments);
-
-        this._callbackContextObjects.push(nextObject);
-
-        return this;
+        // This function is basically syntactic sugar, so just reuse the
+        // perfectly fine waitFor().
+        return this.waitFor.apply(this, arguments);
     }
 
     /**
-     * Stores the final 'then' callback, listens for the completion of all 
-     * previous callbacks, and when successfull, triggers the final callback.
+     * Stores the final callback, listens for the completion of all previous
+     * callbacks, and when successfull, triggers the final callback.
      *
      * @param callback
      * @param context
      */
-    then(callback, context)
+    finally(callback, context)
     {
-        console.assert(
-            !this._inProgress,
-            "Waiter.then: " + Waiter.ERRORS.ALREADY_IN_PROGRESS);
+        if (this._inProgress)
+        {
+            throw "Waiter.finally: " + Waiter.ERRORS.ALREADY_IN_PROGRESS;
+        }
         
-        let finalObject = CallbackUtil.createCallbackContextObject.apply(
+        let finalProcess = CallbackUtil.createCallbackContextObject.apply(
             this,
             arguments);
 
-        let callbacksCount = this._callbackContextObjects.length;
+        let callbacksCount = this._processes.length;
 
         let callbacksCompleted = 0;
 
@@ -94,23 +92,22 @@ class Waiter
 
             if (callbacksCompleted === callbacksCount)
             {
-                finalObject.callback.apply(
-                    finalObject.context,
-                    finalObject.args);
+                finalProcess.callback.apply(
+                    finalProcess.context,
+                    finalProcess.arguments);
             }
         }
-
+        
         this._inProgress = true;
-
-        this._callbackContextObjects.forEach(function(callbackContextObject)
+        
+        this._processes.forEach(function(process)
         {
             let args = [ onCallbackCompleted, this ];
 
-            Array.prototype.push.apply(args, callbackContextObject.args);
+            // Append process.arguments to args array.
+            Array.prototype.push.apply(args, process.arguments);
 
-            callbackContextObject.callback.apply(
-                callbackContextObject.context,
-                args);
+            process.callback.apply(process.context, args);
         }, this);
     }
 }

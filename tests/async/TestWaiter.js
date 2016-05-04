@@ -13,7 +13,7 @@ import Waiter from "src/async/Waiter";
 {
     QUnit.module("Waiter");
     
-    QUnit.test("then -> calls all callbacks", function(assert)
+    QUnit.test("finally -> calls all callbacks", function(assert)
     {
         let waiter = new Waiter();
 
@@ -28,10 +28,10 @@ import Waiter from "src/async/Waiter";
             callback.call(context);
         }
 
-        waiter.waitFor(mockAsyncProcess)
-            .andFor(mockAsyncProcess)
-            .andFor(mockAsyncProcess)
-            .then(function()
+        waiter.waitFor(mockAsyncProcess, this)
+            .andFor(mockAsyncProcess, this)
+            .andFor(mockAsyncProcess, this)
+            .finally(function()
             {
                 calledFinalCallback = true;
             }, this);
@@ -42,5 +42,51 @@ import Waiter from "src/async/Waiter";
             "Mock async process was called the correct number of times.");
 
         assert.ok(calledFinalCallback, "Final callback was called.");
+    });
+
+    QUnit.test("waitFor -> passes arguments correctly", function(assert)
+    {
+        let waiter = new Waiter();
+
+        let argumentsPassed = [];
+
+        function mockAsyncProcess(callback, context)
+        {
+            let args = Array.prototype.splice.call(arguments, 2);
+            
+            argumentsPassed = argumentsPassed.concat(args);
+            
+            callback.call(context);
+        }
+        
+        function finalMockAsyncProcess()
+        {
+            let args = Array.prototype.splice.call(arguments, 0);
+            
+            argumentsPassed = argumentsPassed.concat(args);
+        }
+
+        let bar = {
+            value: "bar"
+        };
+
+        waiter.waitFor(mockAsyncProcess, this, "foo")
+            .andFor(mockAsyncProcess, this, bar)
+            .finally(finalMockAsyncProcess, this, 3, 2, 1);
+
+        assert.strictEqual(
+            argumentsPassed[0],
+            "foo",
+            "String argument was passed correctly.");
+
+        assert.strictEqual(
+            argumentsPassed[1],
+            bar,
+            "Object argument was passed correctly.");
+
+        assert.deepEqual(
+            [ argumentsPassed[2], argumentsPassed[3], argumentsPassed[4] ],
+            [ 3, 2, 1 ],
+            "Multiple integer arguments were passed correctly.");
     });
 }());
