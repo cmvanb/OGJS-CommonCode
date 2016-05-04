@@ -78,22 +78,22 @@ class Sequencer
 
         this._inProgress = true;
         
-        this._callNext();
-    }
-
-    _callNext()
-    {
-        if (this._processes.length > 0)
+        function callNext()
         {
-            let process = this._processes.shift();
-
-            let args = [ this._callNext, this ];
-
-            // Append process.arguments to args array.
-            Array.prototype.push.apply(args, process.arguments);
-
-            process.callback.apply(process.context, args);
+            if (this._processes.length > 0)
+            {
+                let process = this._processes.shift();
+        
+                let args = [ callNext, this ];
+        
+                // Append process.arguments to args array.
+                Array.prototype.push.apply(args, process.arguments);
+        
+                process.callback.apply(process.context, args);
+            }
         }
+        
+        callNext.call(this);
     }
 }
 
