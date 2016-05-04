@@ -22,6 +22,16 @@ class Sequencer
         this._inProgress = false;
     }
 
+    /**
+     * Adds a callback-context-arguments object to an array, to be executed 
+     * in sequence. When finally() is called, the sequencer will call the first
+     * callback, wait for it to complete and then call each following callback
+     * in order.
+     * 
+     * @param callback
+     * @param context
+     * @returns {Object}
+     */
     sequence(callback, context)
     {
         console.assert(
@@ -37,6 +47,16 @@ class Sequencer
         return this;
     }
 
+    /**
+     * Adds a callback-context-arguments object to an array, to be executed 
+     * in sequence. When finally() is called, the sequencer will call the first
+     * callback, wait for it to complete and then call each following callback
+     * in order.
+     * 
+     * @param callback
+     * @param context
+     * @returns {Object}
+     */
     andThen(callback, context)
     {
         // This function is basically syntactic sugar, so just reuse the
@@ -44,6 +64,13 @@ class Sequencer
         return this.sequence.apply(this, arguments);
     }
 
+    /**
+     * Stores the final callback, and kicks off the first callback in the 
+     * sequence.
+     *
+     * @param callback
+     * @param context
+     */
     finally(callback, context)
     {
         console.assert(
