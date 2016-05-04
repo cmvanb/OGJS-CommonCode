@@ -10,11 +10,11 @@ This is the common code repository. It contains low level, re-usable code aimed 
 
 ## Features
 
-* [ ] Asynchronous utilities
-  * [ ] Sequencer
-  * [x] Waiter
+* Asynchronous utilities
+  * Sequencer
+  * Waiter
 
-## TODO
+## Work In Progress
 
 * [ ] Game Loop
 * [ ] Abstract patterns (Entity-Component)
