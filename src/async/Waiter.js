@@ -22,12 +22,12 @@ class Waiter
 
         this._inProgress = false;
     }
-    
+
     /**
-     * Adds a callback-context-arguments object to an array, to be executed 
-     * asynchronously. When all 'waitFor' and 'andFor' callbacks have been 
+     * Adds a callback-context-arguments object to an array, to be executed
+     * asynchronously. When all 'waitFor' and 'andFor' callbacks have been
      * fired, it will call the final 'then' callback.
-     * 
+     *
      * @param callback
      * @param context
      * @returns {Object}
@@ -38,7 +38,7 @@ class Waiter
         {
             throw "Waiter.waitFor: " + Waiter.ERRORS.ALREADY_IN_PROGRESS;
         }
-        
+
         let nextProcess = CallbackUtil.createCallbackContextObject.apply(
             this,
             arguments);
@@ -47,12 +47,12 @@ class Waiter
 
         return this;
     }
-    
+
     /**
-     * Adds a callback-context-arguments object to an array, to be executed 
-     * asynchronously. When all 'waitFor' and 'andFor' callbacks have been 
+     * Adds a callback-context-arguments object to an array, to be executed
+     * asynchronously. When all 'waitFor' and 'andFor' callbacks have been
      * fired, it will call the final 'then' callback.
-     * 
+     *
      * @param callback
      * @param context
      * @returns {Object}
@@ -77,7 +77,7 @@ class Waiter
         {
             throw "Waiter.finally: " + Waiter.ERRORS.ALREADY_IN_PROGRESS;
         }
-        
+
         let finalProcess = CallbackUtil.createCallbackContextObject.apply(
             this,
             arguments);
@@ -97,9 +97,9 @@ class Waiter
                     finalProcess.arguments);
             }
         }
-        
+
         this._inProgress = true;
-        
+
         this._processes.forEach(function(process)
         {
             let args = [ onCallbackCompleted, this ];

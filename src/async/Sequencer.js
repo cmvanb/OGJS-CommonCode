@@ -23,11 +23,11 @@ class Sequencer
     }
 
     /**
-     * Adds a callback-context-arguments object to an array, to be executed 
+     * Adds a callback-context-arguments object to an array, to be executed
      * in sequence. When finally() is called, the sequencer will call the first
      * callback, wait for it to complete and then call each following callback
      * in order.
-     * 
+     *
      * @param callback
      * @param context
      * @returns {Object}
@@ -38,7 +38,7 @@ class Sequencer
         {
             throw "Sequencer.sequence: " + Sequencer.ERRORS.ALREADY_IN_PROGRESS;
         }
-        
+
         let nextProcess = CallbackUtil.createCallbackContextObject.apply(
             this,
             arguments);
@@ -49,11 +49,11 @@ class Sequencer
     }
 
     /**
-     * Adds a callback-context-arguments object to an array, to be executed 
+     * Adds a callback-context-arguments object to an array, to be executed
      * in sequence. When finally() is called, the sequencer will call the first
      * callback, wait for it to complete and then call each following callback
      * in order.
-     * 
+     *
      * @param callback
      * @param context
      * @returns {Object}
@@ -66,7 +66,7 @@ class Sequencer
     }
 
     /**
-     * Stores the final callback, and kicks off the first callback in the 
+     * Stores the final callback, and kicks off the first callback in the
      * sequence.
      *
      * @param callback
@@ -77,22 +77,22 @@ class Sequencer
         this.sequence.apply(this, arguments);
 
         this._inProgress = true;
-        
+
         function callNext()
         {
             if (this._processes.length > 0)
             {
                 let process = this._processes.shift();
-        
+
                 let args = [ callNext, this ];
-        
+
                 // Append process.arguments to args array.
                 Array.prototype.push.apply(args, process.arguments);
-        
+
                 process.callback.apply(process.context, args);
             }
         }
-        
+
         callNext.call(this);
     }
 }

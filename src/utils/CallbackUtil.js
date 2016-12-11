@@ -1,7 +1,7 @@
 /**
- * CallbackUtil is a static utility class containing methods related to 
+ * CallbackUtil is a static utility class containing methods related to
  * callbacks.
- * 
+ *
  * @author Casper
  */
 
@@ -10,7 +10,7 @@
 class CallbackUtil
 {
     /**
-     * Create a js object encapsulating a callback function and it's context, 
+     * Create a js object encapsulating a callback function and it's context,
      * and any additional arguments.
      *
      * @param callback

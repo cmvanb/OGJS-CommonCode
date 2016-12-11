@@ -29,6 +29,7 @@ class AppLoop
     {
         requestAnimationFrame(animate);
 
+        // TODO: Get a time source (clock) and pass its delta time here. -Casper
         update(clock.getDelta());
         render(clock.getDelta());
     }
