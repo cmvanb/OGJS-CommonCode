@@ -13,25 +13,37 @@ class AppLoop
      *
      * @constructor
      */
-    constructor()
+    constructor(timeSource)
+    {
+        this._timeSource = timeSource;
+    }
+
+    /**
+     * Update the application. Pass the amount of time elapsed since this
+     * function was last called.
+     *
+     * @param deltaTime
+     */
+    update(deltaTime)
     {
     }
 
-    function update(dt)
+    /**
+     * Render the application. Pass the amount of time elapsed since this
+     * function was last called.
+     *
+     * @param deltaTime
+     */
+    render(deltaTime)
     {
     }
 
-    function render(dt)
-    {
-    }
-
-    function animate(t)
+    animate(t)
     {
         requestAnimationFrame(animate);
 
-        // TODO: Get a time source (clock) and pass its delta time here. -Casper
-        update(clock.getDelta());
-        render(clock.getDelta());
+        this.update(this._timeSource.getDeltaTime());
+        this.render(this._timeSource.getDeltaTime());
     }
 }
 
